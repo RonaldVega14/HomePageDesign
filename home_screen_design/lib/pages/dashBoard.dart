@@ -87,6 +87,38 @@ class Dashboard extends StatefulWidget {
       ],
     );
   }
+
+//Construye el perfil
+Widget _buildProfile(IconData icon, String title, Color color){
+  return Material(
+        color: Colors.transparent,
+        child: Container(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(6.0),
+              highlightColor: color.withOpacity(1.0),
+              onTap: (){},
+              child:Material(
+                color: Colors.white.withOpacity(0.9),
+                elevation: 12.0,
+                shadowColor: Colors.black,
+                borderRadius: BorderRadius.circular(6.0),
+                child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Flexible(child: Container(
+                          child: Text(title, style: style.copyWith(color: color), textAlign: TextAlign.center,
+                        )), flex: 3, fit: FlexFit.tight,),
+                        Flexible(child:Center(child:Container(child: Icon(icon, color: color,), margin: const EdgeInsets.all(5.0),)),flex: 1, fit: FlexFit.tight,)
+                      ]
+                  )
+                ),
+            ),
+          ),
+      );
+}
+
 //Junta y construye todo el contenido
   Widget _buildContent(){
     return StaggeredGridView.count(
@@ -101,6 +133,7 @@ class Dashboard extends StatefulWidget {
         myItems(CustomIcons.MyFlutterApp.chart_bars, 'Movimientos en fondo', Colors.blue[900]),
         myItems(CustomIcons.MyFlutterApp.database_1, 'Movimientos consolidados', Colors.blue[900]),
         myItems(CustomIcons.MyFlutterApp.book, 'Estado de Cuenta', Colors.blue[900]),
+        _buildProfile(CustomIcons.MyFlutterApp.user, 'Ronald Vega', Colors.blue[900])
       ],
       staggeredTiles: [
         StaggeredTile.extent(2, MediaQuery.of(context).size.height*0.20),
@@ -108,6 +141,7 @@ class Dashboard extends StatefulWidget {
         StaggeredTile.extent(1, MediaQuery.of(context).size.height*0.25),
         StaggeredTile.extent(1, MediaQuery.of(context).size.height*0.25),
         StaggeredTile.extent(1, MediaQuery.of(context).size.height*0.25),
+        StaggeredTile.extent(2, MediaQuery.of(context).size.height*0.10),
       ],
     );
   }
